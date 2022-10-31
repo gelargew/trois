@@ -14,30 +14,25 @@ import { NoseHoover, Trail } from "./components/NoseHoover";
 
 const Home: NextPage = () => {
   return (
-    <>
-      <main>
-        <div>
-          <h1>QWEQWEQWEQEWe</h1>
-        </div>
-        <div>
-          <h1>QWEQWEQWEQEWe</h1>
-        </div>
-        <div>
-          <h1>QWEQWEQWEQEWe</h1>
-        </div>
-        <div>
-          <h1>QWEQWEQWEQEWe</h1>
-        </div>
-      </main>
-      <style jsx>
-        {`
-          main > div {
-            background: gray;
-            height: 90vh;
-          }
-        `}
-      </style>
-    </>
+    <main>
+      <Canvas camera={{ position: [0, 0, 10], far: 2000 }}>
+        <ambientLight />
+        <Suspense fallback={null}>
+          <NoseHoover />
+          <OrbitControls />
+        </Suspense>
+
+        <EffectComposer>
+          <Bloom luminanceThreshold={0.2} luminanceSmoothing={0.3} />
+          <DepthOfField
+            focusDistance={0}
+            focalLength={0.02}
+            bokehScale={2}
+            height={400}
+          />
+        </EffectComposer>
+      </Canvas>
+    </main>
   );
 };
 
